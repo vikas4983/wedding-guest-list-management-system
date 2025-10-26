@@ -4,7 +4,7 @@
     <div class="row">
         <!-- Frist box -->
         <div class="col-xl-3 col-md-6">
-            <a href="#">
+            <a href="{{route('guests.index')}}">
                 <div class="card card-default bg-secondary">
                     <div class="d-flex p-5">
                         <div class="icon-md bg-white rounded-circle mr-3">
@@ -12,7 +12,7 @@
                         </div>
                         <div class="text-left">
                             <span class="h2 d-block text-white"></span>
-                            <p class="text-white">Categories</p>
+                            <p class="text-white">Guests</p>
                         </div>
                     </div>
                 </div>

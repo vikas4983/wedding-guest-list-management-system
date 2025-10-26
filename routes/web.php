@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuestController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
@@ -14,7 +16,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+   Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+   Route::resource('guests',GuestController::class);
 });
