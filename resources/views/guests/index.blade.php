@@ -30,7 +30,7 @@
         <tbody>
             @if ($guests->count() > 0)
                 <div class="row ">
-                    <div class="col text-center mb-5" style="color: rgb(10, 207, 233)">
+                    <div class="col text-center mb-5" style="color: #28A745">
                         <span id="copyData"></span>
                     </div>
                 </div>
