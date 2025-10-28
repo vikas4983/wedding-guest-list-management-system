@@ -80,58 +80,6 @@
         {{ $guests->links() }}
     </div>
 
-    <script>
-        function copy(data) {
-            navigator.clipboard.writeText(data)
-                .then(() => {
-                    const result = document.querySelector('#copyData');
-                    result.innerHTML = data;
-                    setTimeout(() => {
-                        result.innerHTML = '';
-                    }, 3000);
-                })
-                .catch(err => console.error('Failed to copy: ', err));
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            document.addEventListener('click', function(e) {
-                const target = e.target;
-                if (target.classList.contains('copyName')) {
-                    copy(target.dataset.name);
-                } else if (target.classList.contains('copyPhone')) {
-                    copy(target.dataset.phone);
-                } else if (target.classList.contains('copyEmail')) {
-                    copy(target.dataset.email);
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const delete1 = document.querySelectorAll('.deleteBtn1');
-            delete1.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const id = this.dataset.id;
-                    alert(id);
-                })
-            });
-        });
-    </script>
-    <script>
-        @if (session('success'))
-            toastr.success("{{ session('success') }}", "Success");
-        @endif
 
-        @if (session('error'))
-            toastr.error("{{ session('error') }}", "Error");
-        @endif
-
-        @if (session('warning'))
-            toastr.warning("{{ session('warning') }}", "Warning");
-        @endif
-
-        @if (session('info'))
-            toastr.info("{{ session('info') }}", "Info");
-        @endif
-    </script>
+    
 @endsection

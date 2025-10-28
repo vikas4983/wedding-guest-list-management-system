@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\GuestController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,5 @@ Route::middleware([
 ])->group(function () {
    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
    Route::resource('guests',GuestController::class);
+   Route::resource('events',EventController::class);
 });
