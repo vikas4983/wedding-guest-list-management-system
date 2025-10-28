@@ -15,12 +15,11 @@ return [
     'guest_description_placeholder' => 'Enter Guest Descriptions',
     'guest_list' => 'Guests List',
     'guest_edit_modal_size' => 'lg',
-    //Category
-    'category_name' => 'Category Name',
-    'category_list' => 'Categories List',
-    'category_title' => 'Add Category',
-    'category_placeholder' => 'Enter Category Name',
-    'category_edit_modal' => '',
+    //Event
+    'event_name' => 'Event',
+    'event_name_placeholder' => 'Enter Event Name',
+    'event_title' => 'Event',
+    'event_edit_modal_size' => '',
     // Brand
     'brand_name' => 'Brand Name',
     'brand_list' => 'Brand List',

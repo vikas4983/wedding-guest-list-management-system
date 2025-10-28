@@ -1,6 +1,6 @@
 function confirmDelete() {
     if (!window.confirm("Are you sure you want to delete?")) {
-        return fasle;
+        return false;
     } else {
         return true;
     }
@@ -43,7 +43,6 @@ function sendAjax(button) {
             }
             if (data.action === "edit") {
                 const modalId = button.getAttribute("data-target");
-               
                 const modal = document.querySelector(modalId);
                 if (modal) {
                     const modalBody = modal.querySelector(".modal-body");
@@ -64,20 +63,23 @@ function sendAjax(button) {
             button.innerHTML = originalText;
         });
 }
-document
-    .querySelectorAll(".deleteBtn, .statusBtn, .editBtn")
-    .forEach((button) => {
-        button.addEventListener("click", function (e) {
-            e.preventDefault();
-            if (this.classList.contains("deleteBtn")) {
-                if (confirm("Are you sure you want to delete this item?")) {
-                    sendAjax(this);
-                }
-            } else if (this.classList.contains("statusBtn")) {
-                sendAjax(this);
-            } else if (this.classList.contains("editBtn")) {
-               
+document.querySelectorAll(".deleteBtn,  .editBtn").forEach((button) => {
+    button.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (this.classList.contains("deleteBtn")) {
+            if (confirm("Are you sure you want to delete this item?")) {
                 sendAjax(this);
             }
-        });
+        } else if (this.classList.contains("editBtn")) {
+            sendAjax(this);
+        }
     });
+});
+document.querySelectorAll(".statusBtn").forEach((button) => {
+    button.addEventListener("change", function (e) {
+        e.preventDefault();
+        if (this.classList.contains("statusBtn")) {
+            sendAjax(this);
+        }
+    });
+});
