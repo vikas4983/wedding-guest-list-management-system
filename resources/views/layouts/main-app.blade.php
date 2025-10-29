@@ -77,7 +77,7 @@
                 <div class="app-brand">
                     <a href="{{ route('dashboard') }}">
                         <img src="{{ asset('assets/theme/images/logo.png') }}" alt="Mono">
-                        <span class="brand-name">Inventory</span>
+                        <span class="brand-name">Weeding GLMS</span>
                     </a>
                 </div>
                 <!-- begin sidebar scrollbar -->
@@ -150,7 +150,7 @@
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#product" aria-expanded="false" aria-controls="product">
                                 <i class="mdi mdi-palette"></i>
-                                <span class="nav-text">Product <h5 class="badge badge-primary badge-pill">
+                                <span class="nav-text">Invitation <h5 class="badge badge-primary badge-pill">
 
                                     </h5></span> <b class="caret"></b>
                             </a>
@@ -158,13 +158,13 @@
                                 <div class="sub-menu">
                                     <li>
                                         <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
+                                            <span class="nav-text">Sent</span>
 
                                         </a>
                                     </li>
                                     <li>
                                         <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
+                                            <span class="nav-text">Send</span>
 
                                         </a>
                                     </li>
@@ -175,7 +175,7 @@
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#supplier" aria-expanded="false" aria-controls="supplier">
                                 <i class="mdi mdi-package-variant"></i>
-                                <span class="nav-text">Supplier <h5 class="badge badge-primary badge-pill">
+                                <span class="nav-text">Filter <h5 class="badge badge-primary badge-pill">
 
                                     </h5></span> <b class="caret"></b>
                             </a>
@@ -183,169 +183,32 @@
                                 <div class="sub-menu">
                                     <li>
                                         <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
+                                            <span class="nav-text">User 1</span>
 
                                         </a>
                                     </li>
                                     <li>
                                         <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
+                                            <span class="nav-text">User 2</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="#">
+                                            <span class="nav-text">By Event</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="#">
+                                            <span class="nav-text">Budget </span>
 
                                         </a>
                                     </li>
                                 </div>
                             </ul>
                         </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#customer" aria-expanded="false" aria-controls="customer">
-                                <i class="mdi mdi-account-multiple"></i>
-                                <span class="nav-text">Customer <h5 class="badge badge-primary badge-pill">
-
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="customer" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#status" aria-expanded="false" aria-controls="status">
-                                <i class="mdi mdi-clock-outline"></i>
-                                <span class="nav-text">Status <h5 class="badge badge-primary badge-pill">
-
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="status" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#purchase" aria-expanded="false" aria-controls="purchase">
-                                <i class="mdi mdi-cart"></i>
-                                <span class="nav-text">Purchase <h5 class="badge badge-primary badge-pill">
-
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="purchase" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#purchase_item" aria-expanded="false" aria-controls="purchase_item">
-                                <i class="mdi mdi-cart-plus"></i>
-                                <span class="nav-text">Purchase Item <h5 class="badge badge-primary badge-pill">
-
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="purchase_item" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#sale" aria-expanded="false" aria-controls="sale">
-                                <i class="mdi mdi-chart-line"></i>
-                                <span class="nav-text">Sale <h5 class="badge badge-primary badge-pill">
-
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="sale" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#saleItem" aria-expanded="false" aria-controls="saleItem">
-                                <i class="mdi mdi-cart-plus"></i>
-                                <span class="nav-text">Sale Item <h5 class="badge badge-primary badge-pill">
-
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="saleItem" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
+                       
                     </ul>
 
                 </div>
@@ -635,23 +498,7 @@
             window.addEventListener('resize', debounce(handleResponsiveLayout));
         });
     </script>
-<script>
-        @if (session('success'))
-            toastr.success("{{ session('success') }}", "Success");
-        @endif
 
-        @if (session('error'))
-            toastr.error("{{ session('error') }}", "Error");
-        @endif
-
-        @if (session('warning'))
-            toastr.warning("{{ session('warning') }}", "Warning");
-        @endif
-
-        @if (session('info'))
-            toastr.info("{{ session('info') }}", "Info");
-        @endif
-    </script>
 </body>
 
 </html>

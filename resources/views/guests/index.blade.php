@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between align-items-center">
         <!-- Left: Add Guest button -->
         <div>
-            <button class="btn btn-info" id="addGuestBtn">Add Guest</button>
+            <a href="{{ route('guests.create') }}" class="btn btn-info" id="addGuestBtn">Add Guest</a>
         </div>
 
         <!-- Right: Search box -->
@@ -24,6 +24,7 @@
                 <th>Name</th>
                 <th>Mobile Number</th>
                 <th>Email</th>
+                <th>Event</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -41,6 +42,7 @@
                             {{ Str::limit($guest->name ?? '', 25) }}
                             <i class="fas fa-copy copyName" style="cursor: pointer; margin-left: 8px; color: #503F71;"
                                 title="Copy Name" data-name="{{ $guest->name }}"></i>
+
                         </td>
                         <td>
                             <a href="tel:{{ $guest->phone }}" style="text-decoration: none; color: inherit;">
@@ -55,6 +57,13 @@
                             </a>
                             <i class="fas fa-copy copyEmail" style="cursor: pointer; margin-left: 8px; color: #503F71;"
                                 title="Copy Email" data-email="{{ $guest->email }}"></i>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {{ $guest->events->pluck('name')->implode(' | ') }}
+                                </div>
+                            </div>
                         </td>
                         <td>
                             <div class="d-flex gap-2">
@@ -79,7 +88,21 @@
     <div class="d-flex justify-content-center mt-5">
         {{ $guests->links() }}
     </div>
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}", "Success");
+        @endif
 
+        @if (session('error'))
+            toastr.error("{{ session('error') }}", "Error");
+        @endif
 
-    
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}", "Warning");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}", "Info");
+        @endif
+    </script>
 @endsection

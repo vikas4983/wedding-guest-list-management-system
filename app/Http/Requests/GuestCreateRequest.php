@@ -25,6 +25,8 @@ class GuestCreateRequest extends FormRequest
         $guestId = $this->route('guest');
         return [
             'name' =>  ['required', 'string', 'max:30'],
+            'event_ids' =>  ['nullable', 'array'],
+            'event_ids.*' => ['string', 'exists:events,id'],
             'email' => ['required', 'email', 'max:50', Rule::unique('guests')->ignore($guestId)],
             'phone' => ['required', 'digits:10']
         ];
