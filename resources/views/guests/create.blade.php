@@ -13,7 +13,6 @@
         }
     </style>
     <x-breadcrumb-component :home-route="['name' => 'Home', 'url' => route('dashboard')]" :parent-route="['name' => 'Guests', 'url' => route('guests.index')]" :current-route="['name' => 'Create', 'url' => null]" />
-
     <div class="row">
         <div class="col-lg-12">
             <div class="card shadow">
@@ -25,7 +24,7 @@
                     <form id="createGuest" action="{{ route('guests.store') }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label for="name" class="font-weight-medium">{{ __('labels.guest_name') }}</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     id="name" name="name" placeholder="{{ __('labels.guest_name_placeholder') }}"
@@ -36,7 +35,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label for="email" class="font-weight-medium">{{ __('labels.guest_email') }}</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     id="email" name="email" placeholder="{{ __('labels.guest_email_placeholder') }}"
@@ -47,7 +46,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label for="guest_phone" class="font-weight-medium">{{ __('labels.guest_phone') }}</label>
                                 <input type="number" maxlength="10"
                                     oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);"
@@ -63,6 +62,47 @@ is-invalid
                                     </div>
                                 @enderror
                             </div>
+
+                            <div class="form-group col-lg-6">
+                                <label for="event" class="font-weight-medium">{{ __('labels.event_name') }}</label>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <span style="margin-left: 1.5rem;"><input class="form-check-input" type="checkbox"
+                                                id="allEvent" name="event[]" checked="checked" value="0"
+                                                id="defaultCheck1">
+                                            <label class="form-check-label mr-5" for="defaultCheck1">
+                                                All
+                                            </label></span>
+                                    </div>
+                                    @foreach ($data['events'] as $event)
+                                        <div class="col-lg-3">
+                                            <span style="margin-left: 1.5rem;">
+                                                <input class="form-check-input selectEvent" type="checkbox"
+                                                    name="event_ids[]" value="{{ $event->id }}"
+                                                    id="event_{{ $event->id }}">
+                                                <label class="form-check-label" for="event_{{ $event->id }}">
+                                                    {{ ucfirst($event->name) }}
+                                                </label>
+                                            </span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const allEvent = document.querySelector('#allEvent');
+                                    const selectedEvent = document.querySelectorAll('.selectEvent');
+                                    const selectedcb = allEvent.checked ? [allEvent.value] : [''];
+                                    allEvent.addEventListener('change', function() {
+                                        selectedEvent.forEach(cb => cb.checked = false);
+                                    });
+                                    selectedEvent.forEach(cb => {
+                                        cb.addEventListener('change', function() {
+                                            allEvent.checked = false;
+                                        });
+                                    });
+                                });
+                            </script>
 
                         </div>
                         <div class="row mt-5">

@@ -5,19 +5,32 @@ namespace App\Http\Controllers;
 use App\Models\Guest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GuestCreateRequest;
+use App\Services\StaticDataService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Arr;
 
 class GuestController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    protected $staticDataService;
+
+    public function __construct(StaticDataService $staticDataService)
+    {
+        $this->staticDataService = $staticDataService;
+    }
+
+
     public function index()
     {
-        $guests = Guest::paginate(5);
+        $guests = Guest::with('events')->latest()->paginate(10);
+
+
         return view('guests.index', compact('guests'));
     }
 
@@ -26,7 +39,9 @@ class GuestController extends Controller
      */
     public function create()
     {
-        return view('guests.create');
+        $data = $this->staticDataService->getData();
+
+        return view('guests.create', compact('data'));
     }
 
     /**
@@ -39,7 +54,8 @@ class GuestController extends Controller
         DB::beginTransaction();
         try {
             $validatedData['user_id'] = Auth::user()->id;
-            Guest::create($validatedData);
+            $guest =  Guest::create(Arr::only($validatedData, ['user_id', 'name', 'email', 'phone']));
+            $guest->events()->sync($validatedData['event_ids']);
             Log::info('Invitation send successfully');
             DB::commit();
 
@@ -75,11 +91,12 @@ class GuestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $id, StaticDataService $staticDataService)
     {
         try {
             $objectdata = Guest::find($id);
-            $editForm = view('forms.edit.guestForm', compact('objectdata'))->render();
+            $data = $staticDataService->getData();
+            $editForm = view('forms.edit.guestForm', compact('objectdata', 'data'))->render();
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
                     'action' => 'edit',
@@ -107,9 +124,11 @@ class GuestController extends Controller
     public function update(GuestCreateRequest $request, Guest $guest)
     {
         $validatedData = $request->validated();
+
         try {
             if ($guest) {
-                $guest->update($validatedData);
+                $guest->update(Arr::only($validatedData, ['name', 'email', 'phone']));
+                $guest->events()->sync($validatedData['event_ids']);
             }
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
