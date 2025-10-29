@@ -7,7 +7,6 @@
  // GITHUB: https://github.com/themefisher/
 -->
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -28,6 +27,9 @@
     <link href="{{ asset('assets/theme/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/theme/https://cdn.quilljs.com/1.3.6/quill.snow.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/theme/plugins/toaster/toastr.min.css') }}" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- MONO CSS -->
     <link id="main-css-href" rel="stylesheet" href="{{ asset('assets/theme/css/style.css') }}" />
     <!-- FAVICON -->
@@ -75,7 +77,7 @@
                 <div class="app-brand">
                     <a href="{{ route('dashboard') }}">
                         <img src="{{ asset('assets/theme/images/logo.png') }}" alt="Mono">
-                        <span class="brand-name">Inventory</span>
+                        <span class="brand-name">Weeding GLMS</span>
                     </a>
                 </div>
                 <!-- begin sidebar scrollbar -->
@@ -96,8 +98,8 @@
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#category" aria-expanded="false" aria-controls="category">
                                 <i class="mdi mdi-shape"></i>
-                                <span class="nav-text">Category <h5 class="badge badge-primary badge-pill">
-                                        
+                                <span class="nav-text">Guest <h5 class="badge badge-primary badge-pill">
+
                                     </h5>
 
                                 </span> <b class="caret"></b>
@@ -105,13 +107,13 @@
                             <ul class="collapse" id="category" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
-                                        <a class="sidenav-item-link" href="#">
+                                        <a class="sidenav-item-link" href="{{ route('guests.index') }}">
                                             <span class="nav-text">List</span>
 
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="sidenav-item-link" href="#">
+                                        <a class="sidenav-item-link" href="{{ route('guests.create') }}">
                                             <span class="nav-text">Create</span>
 
                                         </a>
@@ -123,20 +125,20 @@
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#brand" aria-expanded="false" aria-controls="brand">
                                 <i class="mdi mdi-label"></i>
-                                <span class="nav-text">Brand <h5 class="badge badge-primary badge-pill">
-                                      
+                                <span class="nav-text">Event <h5 class="badge badge-primary badge-pill">
+
                                     </h5></span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="brand" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
-                                        <a class="sidenav-item-link" href="#">
+                                        <a class="sidenav-item-link" href="{{route('events.index')}}">
                                             <span class="nav-text">List</span>
 
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="sidenav-item-link" href="#">
+                                        <a class="sidenav-item-link" href="{{route('events.create')}}">
                                             <span class="nav-text">Create</span>
 
                                         </a>
@@ -148,21 +150,21 @@
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#product" aria-expanded="false" aria-controls="product">
                                 <i class="mdi mdi-palette"></i>
-                                <span class="nav-text">Product <h5 class="badge badge-primary badge-pill">
-                                        
+                                <span class="nav-text">Invitation <h5 class="badge badge-primary badge-pill">
+
                                     </h5></span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="product" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
                                         <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
+                                            <span class="nav-text">Sent</span>
 
                                         </a>
                                     </li>
                                     <li>
                                         <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
+                                            <span class="nav-text">Send</span>
 
                                         </a>
                                     </li>
@@ -173,177 +175,40 @@
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#supplier" aria-expanded="false" aria-controls="supplier">
                                 <i class="mdi mdi-package-variant"></i>
-                                <span class="nav-text">Supplier <h5 class="badge badge-primary badge-pill">
-                                       
+                                <span class="nav-text">Filter <h5 class="badge badge-primary badge-pill">
+
                                     </h5></span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="supplier" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
                                         <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
+                                            <span class="nav-text">User 1</span>
 
                                         </a>
                                     </li>
                                     <li>
                                         <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
+                                            <span class="nav-text">User 2</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="#">
+                                            <span class="nav-text">By Event</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="#">
+                                            <span class="nav-text">Budget </span>
 
                                         </a>
                                     </li>
                                 </div>
                             </ul>
                         </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#customer" aria-expanded="false" aria-controls="customer">
-                                <i class="mdi mdi-account-multiple"></i>
-                                <span class="nav-text">Customer <h5 class="badge badge-primary badge-pill">
-                                        
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="customer" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#status" aria-expanded="false" aria-controls="status">
-                                <i class="mdi mdi-clock-outline"></i>
-                                <span class="nav-text">Status <h5 class="badge badge-primary badge-pill">
-                                       
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="status" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#purchase" aria-expanded="false" aria-controls="purchase">
-                                <i class="mdi mdi-cart"></i>
-                                <span class="nav-text">Purchase <h5 class="badge badge-primary badge-pill">
-                                       
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="purchase" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#purchase_item" aria-expanded="false" aria-controls="purchase_item">
-                                <i class="mdi mdi-cart-plus"></i>
-                                <span class="nav-text">Purchase Item <h5 class="badge badge-primary badge-pill">
-                                       
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="purchase_item" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#sale" aria-expanded="false" aria-controls="sale">
-                                <i class="mdi mdi-chart-line"></i>
-                                <span class="nav-text">Sale <h5 class="badge badge-primary badge-pill">
-                                       
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="sale" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
-                                data-target="#saleItem" aria-expanded="false" aria-controls="saleItem">
-                                <i class="mdi mdi-cart-plus"></i>
-                                <span class="nav-text">Sale Item <h5 class="badge badge-primary badge-pill">
-                                        
-                                    </h5></span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="saleItem" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">List</span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="#">
-                                            <span class="nav-text">Create</span>
-
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
+                       
                     </ul>
 
                 </div>
@@ -554,11 +419,13 @@
     </script>
     <script src="{{ asset('assets/theme/https://cdn.quilljs.com/1.3.6/quill.js') }}"></script>
     <script src="{{ asset('assets/theme/plugins/toaster/toastr.min.js') }}"></script>
+
     <script src="{{ asset('assets/theme/js/mono.js') }}"></script>
     <script src="{{ asset('assets/theme/js/chart.js') }}"></script>
     <script src="{{ asset('assets/theme/js/map.js') }}"></script>
     <script src="{{ asset('assets/theme/js/custom.js') }}"></script>
     <script src="{{ asset('assets/theme/js/custom-js/action-button.js') }}"></script>
+    <script src="{{ asset('assets/theme/js/custom-js/copy-data.js') }}"></script>
 
     <script>
         const logout = document.querySelector('#logout');
@@ -587,17 +454,20 @@
             debug: false,
             newestOnTop: true,
             progressBar: true,
-            positionClass: 'toast-bottom-center',
+            positionClass: 'toast-bottom-center', 
             preventDuplicates: false,
-            showDuration: '300',
-            hideDuration: '1000',
-            timeOut: '5000',
-            extendedTimeOut: '1000',
+            showDuration: 100,
+            hideDuration: 1000,
+            timeOut: 5000,
+            extendedTimeOut: 1000,
             showEasing: 'swing',
             hideEasing: 'linear',
             showMethod: 'fadeIn',
             hideMethod: 'fadeOut'
         };
+
+       
+        
     </script>
     <script>
         function copyToClipboard(text) {
@@ -609,6 +479,25 @@
         }
     </script>
 
+    <script>
+        function handleResponsiveLayout() {
+            console.log(window.innerWidth <= 768 ? "Mobile view" : "Desktop view");
+        }
+
+        function debounce(func, timeout = 100) {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func.apply(this, args);
+                }, timeout);
+            };
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            handleResponsiveLayout();
+            window.addEventListener('resize', debounce(handleResponsiveLayout));
+        });
+    </script>
 
 </body>
 
