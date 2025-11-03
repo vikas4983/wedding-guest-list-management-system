@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guest extends Model
 {
-    public $fillable = ['user_id', 'name', 'email', 'phone'];
+    public $fillable = ['user_id', 'name', 'email', 'phone','status'];
 
     public function events()
     {

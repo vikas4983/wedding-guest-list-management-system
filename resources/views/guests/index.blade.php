@@ -2,26 +2,14 @@
 @section('title', 'Guests List')
 @section('content')
     <x-breadcrumb-component :home-route="['name' => 'Home', 'url' => route('dashboard')]" :current-route="['name' => 'List', 'url' => null]" class="mb-5" />
+    <x-headers.second-header-component :createRoute="route('guests.create')" :invitationRoute="route('send.invitation')" :searchRoute="null" />
 
-    <div class="d-flex justify-content-between align-items-center">
-        <!-- Left: Add Guest button -->
-        <div>
-            <a href="{{ route('guests.create') }}" class="btn btn-info" id="addGuestBtn">Add Guest</a>
-        </div>
-
-        <!-- Right: Search box -->
-        <div class="input-group" style="width: 300px;">
-            <input type="text" class="form-control" placeholder="Enter name, mobile, email...">
-            <button class="input-group-text">
-                <i class="mdi mdi-account-search-outline"></i>
-            </button>
-        </div>
-    </div>
     <table class="table  table-product" style="width:100%">
         <thead>
             <tr>
+
                 <th>#</th>
-                <th>Name</th>
+                <th><input type="checkbox" name="allCb" class="allCb" id="allCb"> Name</th>
                 <th>Mobile Number</th>
                 <th>Email</th>
                 <th>Event</th>
@@ -39,6 +27,8 @@
                     <tr class="viewData">
                         <td>{{ $index + 1 }}</td>
                         <td>
+                            <input type="checkbox" class="allCb  singleCb" value="{{ $guest->id }}" name="id"
+                                id="singleCb">
                             {{ Str::limit($guest->name ?? '', 25) }}
                             <i class="fas fa-copy copyName" style="cursor: pointer; margin-left: 8px; color: #503F71;"
                                 title="Copy Name" data-name="{{ $guest->name }}"></i>
