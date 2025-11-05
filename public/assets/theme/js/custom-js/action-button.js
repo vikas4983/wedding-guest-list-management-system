@@ -7,8 +7,8 @@ function confirmDelete() {
 }
 
 function sendAjax(button) {
-    const row = button.closest("tr");
     const form = button.closest("form");
+    const row = button.closest("tr") || button.closest(".card-item");
     button.disabled = true;
     const originalText = button.innerHTML;
     button.innerHTML = '<i class="mdi mdi-loading mdi-spin"></i>';
@@ -37,11 +37,13 @@ function sendAjax(button) {
         })
         .then((data) => {
             if (data.action === "delete") {
-                row.remove();
-                toastr.error(data.message);
+                if (row) {
+                    row.remove();
+                    toastr.error(data.message);
+                }
             }
             if (data.action === "status") {
-                toastr.success("Status updated successfully!");
+                toastr.success(data.message);
             }
             if (data.action === "edit") {
                 const modalId = button.getAttribute("data-target");

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GuestController;
@@ -21,5 +22,6 @@ Route::middleware([
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('guests', GuestController::class);
     Route::resource('events', EventController::class);
+    Route::resource('cards', CardController::class);
     Route::post('invitation', [InvitationController::class, 'invitation'])->name('send.invitation');
 });

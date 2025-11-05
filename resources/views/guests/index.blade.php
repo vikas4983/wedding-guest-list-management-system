@@ -57,9 +57,10 @@
                         </td>
                         <td>
                             <div class="d-flex gap-2">
-                                <x-delete-action-component :route="route('guests.destroy', $guest->id)" />
                                 <x-edit-action-component :route="route('guests.edit', $guest->id)" :objectData="$guest" :method="'GET'"
                                     :title="__('labels.guest_title')" :modalSize="__('labels.guest_edit_modal_size')" />
+                                <span class="mx-1"></span>
+                                <x-delete-action-component :route="route('guests.destroy', $guest->id)" />
 
                             </div>
                         </td>

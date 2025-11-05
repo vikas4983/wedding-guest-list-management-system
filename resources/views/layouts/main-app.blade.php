@@ -148,6 +148,31 @@
                         </li>
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                                data-target="#card" aria-expanded="false" aria-controls="card">
+                                <i class="mdi mdi-label"></i>
+                                <span class="nav-text">Card <h5 class="badge badge-primary badge-pill">
+
+                                    </h5></span> <b class="caret"></b>
+                            </a>
+                            <ul class="collapse" id="card" data-parent="#sidebar-menu">
+                                <div class="sub-menu">
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{route('cards.index')}}">
+                                            <span class="nav-text">List</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{route('cards.create')}}">
+                                            <span class="nav-text">Create</span>
+
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#product" aria-expanded="false" aria-controls="product">
                                 <i class="mdi mdi-palette"></i>
                                 <span class="nav-text">Invitation <h5 class="badge badge-primary badge-pill">
@@ -498,7 +523,23 @@
             window.addEventListener('resize', debounce(handleResponsiveLayout));
         });
     </script>
+<script>
+    //  @if (session('success'))
+    //         toastr.success("{{ session('success') }}", "Success");
+    //     @endif
 
+    //     @if (session('error'))
+    //         toastr.error("{{ session('error') }}", "Error");
+    //     @endif
+
+    //     @if (session('warning'))
+    //         toastr.warning("{{ session('warning') }}", "Warning");
+    //     @endif
+
+    //     @if (session('info'))
+    //         toastr.info("{{ session('info') }}", "Info");
+    //     @endif
+</script>
 </body>
 
 </html>
