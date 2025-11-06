@@ -20,4 +20,8 @@ class Event extends Model
     {
         return $query->where('is_active', 1);
     }
+
+    public function card(){
+        return $this->hasOne(Card::class,'event_id', 'id');
+    }
 }

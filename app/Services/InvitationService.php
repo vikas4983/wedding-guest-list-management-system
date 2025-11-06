@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\Log;
 class InvitationService
 {
 
-    public function sendInvitation($guest)
+    public function sendInvitation($guest, $card)
     {
-        Mail::to($guest->email)->send(new InvitationMail($guest));
-        Log::info('Invitation sent and status update', [
-            'id' => $guest->id,
-            'name' => $guest->name,
-        ]);
+        try {
+            Mail::to($guest->email)->send(new InvitationMail($guest, $card));
+        } catch (\Throwable $th) {
+            Log::error('Mail failed'  . $th->getMessage(), [
+                'id' => $guest->id,
+                'name' => $guest->name,
+                'card' => $card->id,
+            ]);
+        }
     }
 }

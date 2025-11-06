@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Blade;
 
 class InvitationMail extends Mailable
 {
@@ -17,11 +18,13 @@ class InvitationMail extends Mailable
      * Create a new message instance.
      */
     public $guest;
+    public $card;
 
-    public function __construct($guest)
+    public function __construct($guest, $card)
     {
 
         $this->guest = $guest;
+        $this->card = $card;
     }
 
     /**
@@ -30,7 +33,7 @@ class InvitationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Invitation Mail',
+            subject: $this->card->title ?? 'Invitation',
         );
     }
 
@@ -39,12 +42,14 @@ class InvitationMail extends Mailable
      */
     public function content(): Content
     {
-
+        $body = Blade::render(
+            $this->card->html ?: '<p>No template found.</p>',
+            ['card' => $this->card, 'guest' => $this->guest]
+        );
         return new Content(
             view: 'emails.event-invitation',
             with: [
-                'name' => $this->guest->name,
-                'email' => $this->guest->email,
+                'body' => $body,
             ]
         );
     }

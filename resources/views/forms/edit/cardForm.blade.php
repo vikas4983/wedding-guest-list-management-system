@@ -6,7 +6,8 @@
              <label for="event_id" class="font-weight-medium">{{ __('labels.card_name') }}</label>
              <select class="form-control @error('event_id') is-invalid @enderror" name="event_id" id="event_id">
                  @foreach ($data['events'] as $event)
-                     <option value="{{ $event->id }}" {{ old('event_id',$event->id) === $event->id ? 'selected' : '' }}>
+                 @dump($event->id)
+                     <option value="{{ $event->id }}" {{ old('event_id',$objectdata->event_id) === $event->id ? 'selected' : '' }}>
                          {{ ucfirst($event->name) }}
                      </option>
                  @endforeach

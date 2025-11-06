@@ -26,4 +26,8 @@ class Card extends Model
     {
         return $this->belongsTo(Event::class);
     }
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class CardCreateRequest extends FormRequest
 {
@@ -21,8 +23,10 @@ class CardCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $card = $this->route('card');
+        $cardId = $card instanceof \App\Models\Card ? $card->id : $card;
         return [
-            'event_id'   => ['required', 'integer', 'exists:events,id', 'unique:cards,event_id'],
+            'event_id'   => ['required', 'integer', 'exists:events,id', Rule::unique('cards', 'event_id')->ignore($cardId,'id')],
             'image'      => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
             'date'       => ['required', 'date'],
             'time' => ['required', 'regex:/^\d{2}:\d{2}(:\d{2})?$/'],

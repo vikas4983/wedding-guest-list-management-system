@@ -44,12 +44,10 @@ class SendInvitationMail implements ShouldQueue
 
         try {
             $activeEventNames  = Event::active()->pluck('name')->toArray();
-            // $cards = Card::where('is_active', 1)->pluck('name')->toArray();
             foreach ($guest->events as  $event) {
-                //  if (in_array($event->name, $activeEventNames) && in_array($event->name,  $cards)) {
                 if (in_array($event->name, $activeEventNames)) {
-                    // $cardObject = Card::whereIn('name', $cards)->first();
-                    $this->invitationService->sendInvitation($guest);
+                    $card = $event->card;
+                    $this->invitationService->sendInvitation($guest, $card);
                 }
                 $this->updateStatus($guest);
             }
@@ -67,5 +65,4 @@ class SendInvitationMail implements ShouldQueue
             'status' => 1
         ]);
     }
-    
 }
