@@ -9,6 +9,7 @@ use App\Services\StaticDataService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class CardController extends Controller
 {
@@ -112,8 +113,8 @@ class CardController extends Controller
     public function update(Request $request, Card $card)
     {
         try {
-            $validatedData = app(\App\Http\Requests\CardCreateRequest::class)->validated();
-        } catch (\Illuminate\Validation\ValidationException $e) {
+            $validatedData = app(CardCreateRequest::class)->validated();
+        } catch (ValidationException $e) {
             Log::error('Validation failed: ', $e->errors());
             if (request()->ajax() || request()->wantsJson()) {
                 return response()->json([

@@ -18,11 +18,14 @@ class SendInvitationMail implements ShouldQueue
      * Create a new job instance.
      */
     public $guest;
+    public $selectedIds;
     protected $invitationService;
 
-    public function __construct($guest)
+    public function __construct($guest,  $selectedIds = [])
     {
         $this->guest = $guest;
+        $this->selectedIds = $selectedIds;
+       
     }
 
 
@@ -32,6 +35,8 @@ class SendInvitationMail implements ShouldQueue
     public function handle(InvitationService $invitationService): void
     {
         $guest = $this->guest;
+        $eventIds = $this->selectedIds;
+
         $this->invitationService = $invitationService;
 
         if ($guest->status === 1) {
@@ -43,16 +48,28 @@ class SendInvitationMail implements ShouldQueue
         }
 
         try {
-            $activeEventNames  = Event::active()->pluck('name')->toArray();
-            foreach ($guest->events as  $event) {
-                if (in_array($event->name, $activeEventNames)) {
-                    $card = $event->card;
-                    $this->invitationService->sendInvitation($guest, $card);
+            $activeEventNames  = Event::active()->pluck('name')->toArray() ?? [];
+            if (!empty($guest->events)) {
+                foreach ($guest->events as  $event) {
+                    if (in_array($event->name, $activeEventNames)) {
+                        $card = $event->card;
+                        $this->invitationService->sendInvitation($guest, $card);
+                    }
+                    // $this->updateStatus($guest);
                 }
-                $this->updateStatus($guest);
+            }
+            $eventIds = collect($eventIds)->flatten()->toArray();
+            if (!empty($eventIds)) {
+                foreach ($eventIds as  $eventId) {
+                    if ($event = Event::with('card')->find($eventId)) {
+                        $card = $event->card;
+                        Log::info($card);
+                        $this->invitationService->sendInvitation($guest, $card);
+                    }
+                }
             }
         } catch (\Throwable $th) {
-            Log::error('Invitation send failed', [
+            Log::error('Invitation send failed' . $th->getMessage(), [
                 'id' => $guest->id,
                 'guest_name' => $guest->name,
                 'error' => $th->getMessage(),

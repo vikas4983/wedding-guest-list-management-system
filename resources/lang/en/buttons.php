@@ -5,6 +5,7 @@ return [
     'delete' => 'Delete',
     'cancel' => 'Cancel',
     'add_guest' => 'Send Invitation',
+    'invitation' => 'Send Invitation',
     'add_new_brand' => 'Add New Brand',
     'add_new_product' => 'Add New Product',
     'add_new_supplier' => 'Add New Supplier',
@@ -13,6 +14,6 @@ return [
     'add_new_purchase' => 'Add New Purchase',
     'add_new_purchase_item' => 'Add New Purchase Item',
     'add_new_sale' => 'Add New Sale',
-     'add_new_sale_item' => 'Add New Sale Item',
+    'add_new_sale_item' => 'Add New Sale Item',
 
 ];

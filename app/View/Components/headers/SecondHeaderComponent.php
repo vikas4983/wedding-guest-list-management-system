@@ -14,7 +14,7 @@ class SecondHeaderComponent extends Component
     public $createRoute;
     public $invitationRoute;
     public $searchRoute;
-    public function __construct($createRoute, $invitationRoute=null, $searchRoute = null)
+    public function __construct( $createRoute,  $invitationRoute=null,  $searchRoute = null)
     {
         $this->createRoute = $createRoute;
         $this->invitationRoute = $invitationRoute;

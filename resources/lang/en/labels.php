@@ -3,6 +3,7 @@ return [
     //Coumn
     'action' => 'Action',
     'status' => 'Status',
+
     // Guest
     'guest_title' => 'Gaust',
     'guest_name' => 'Guest Name',
@@ -15,6 +16,7 @@ return [
     'guest_description_placeholder' => 'Enter Guest Descriptions',
     'guest_list' => 'Guests List',
     'guest_edit_modal_size' => 'lg',
+
     //Event
     'event_name' => 'Event',
     'event_name_placeholder' => 'Enter Event Name',
@@ -33,21 +35,22 @@ return [
     'card_location_placeholder' => 'Enter Location',
     'card_address' => 'Address',
     'card_address_placeholder' => 'Enter Address',
-
     'card_description' => 'Description',
     'card_description_placeholder' => 'Enter Guest Descriptions',
-
     'card_theme_color' => 'Theme',
     'card_theme_color_placeholder' => 'Enter Theme Color',
-
     'card_rsvp_link' => 'Rsvp Link',
     'card_rsvp_link_placeholder' => 'Enter Rsvp link',
     'card_html' => 'Html',
     'card_html_placeholder' => 'Enter HTML Code',
-
     'card_list' => 'Guests List',
     'card_edit_modal_size' => 'lg',
 
+    // Contact
+    'contact_name' => 'Upload File',
+    'contact_title' => 'Upload Bulk Contacts',
+    'contact_edit_title' => 'Contact',
+  
 
 
 
