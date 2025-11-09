@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+ <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
         <div class="d-flex align-items-center" style="gap: 1rem;">
             <a href="{{$createRoute}}" class="btn btn-info">Add Guest</a>
             <form id="sendInvitation" style="display: none" action="{{$invitationRoute}}" method="post" class="m-0 ">
@@ -13,4 +13,6 @@
                 <i class="mdi mdi-account-search-outline"></i>
             </button>
         </div>
-    </div>
+    </div> 
+
+     

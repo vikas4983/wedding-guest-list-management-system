@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GuestController;
@@ -23,5 +24,7 @@ Route::middleware([
     Route::resource('guests', GuestController::class);
     Route::resource('events', EventController::class);
     Route::resource('cards', CardController::class);
+    Route::resource('contacts', ContactController::class);
+    Route::get('export-file', [ContactController::class, 'export'])->name('export.contacts');
     Route::post('invitation', [InvitationController::class, 'invitation'])->name('send.invitation');
 });

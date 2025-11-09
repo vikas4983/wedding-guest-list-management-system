@@ -7,6 +7,7 @@
  // GITHUB: https://github.com/themefisher/
 -->
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -132,13 +133,13 @@
                             <ul class="collapse" id="brand" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
-                                        <a class="sidenav-item-link" href="{{route('events.index')}}">
+                                        <a class="sidenav-item-link" href="{{ route('events.index') }}">
                                             <span class="nav-text">List</span>
 
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="sidenav-item-link" href="{{route('events.create')}}">
+                                        <a class="sidenav-item-link" href="{{ route('events.create') }}">
                                             <span class="nav-text">Create</span>
 
                                         </a>
@@ -157,14 +158,39 @@
                             <ul class="collapse" id="card" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
-                                        <a class="sidenav-item-link" href="{{route('cards.index')}}">
+                                        <a class="sidenav-item-link" href="{{ route('cards.index') }}">
                                             <span class="nav-text">List</span>
 
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="sidenav-item-link" href="{{route('cards.create')}}">
+                                        <a class="sidenav-item-link" href="{{ route('cards.create') }}">
                                             <span class="nav-text">Create</span>
+
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                                data-target="#contact" aria-expanded="false" aria-controls="contact">
+                                <i class="mdi mdi-label"></i>
+                                <span class="nav-text">Contact <h5 class="badge badge-primary badge-pill">
+
+                                    </h5></span> <b class="caret"></b>
+                            </a>
+                            <ul class="collapse" id="contact" data-parent="#sidebar-menu">
+                                <div class="sub-menu">
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ route('contacts.index') }}">
+                                            <span class="nav-text">List</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ route('contacts.create') }}">
+                                            <span class="nav-text">Upload File</span>
 
                                         </a>
                                     </li>
@@ -233,7 +259,7 @@
                                 </div>
                             </ul>
                         </li>
-                       
+
                     </ul>
 
                 </div>
@@ -479,7 +505,7 @@
             debug: false,
             newestOnTop: true,
             progressBar: true,
-            positionClass: 'toast-bottom-center', 
+            positionClass: 'toast-bottom-center',
             preventDuplicates: false,
             showDuration: 100,
             hideDuration: 1000,
@@ -490,9 +516,6 @@
             showMethod: 'fadeIn',
             hideMethod: 'fadeOut'
         };
-
-       
-        
     </script>
     <script>
         function copyToClipboard(text) {
@@ -523,23 +546,23 @@
             window.addEventListener('resize', debounce(handleResponsiveLayout));
         });
     </script>
-<script>
-    //  @if (session('success'))
-    //         toastr.success("{{ session('success') }}", "Success");
-    //     @endif
+    <script>
+        //  @if (session('success'))
+        //         toastr.success("{{ session('success') }}", "Success");
+        //     @endif
 
-    //     @if (session('error'))
-    //         toastr.error("{{ session('error') }}", "Error");
-    //     @endif
+        //     @if (session('error'))
+        //         toastr.error("{{ session('error') }}", "Error");
+        //     @endif
 
-    //     @if (session('warning'))
-    //         toastr.warning("{{ session('warning') }}", "Warning");
-    //     @endif
+        //     @if (session('warning'))
+        //         toastr.warning("{{ session('warning') }}", "Warning");
+        //     @endif
 
-    //     @if (session('info'))
-    //         toastr.info("{{ session('info') }}", "Info");
-    //     @endif
-</script>
+        //     @if (session('info'))
+        //         toastr.info("{{ session('info') }}", "Info");
+        //     @endif
+    </script>
 </body>
 
 </html>

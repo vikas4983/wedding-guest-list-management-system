@@ -93,63 +93,137 @@ document.querySelectorAll(".statusBtn").forEach((button) => {
 // Checkbox
 document.addEventListener("DOMContentLoaded", function () {
     const allCb = document.querySelector(".allCb");
+    const eventBtn = document.querySelector(".eventBtn");
     const singleCb = document.querySelectorAll(".singleCb");
     const invitationBtn = document.querySelector("#invitationBtn");
     const sendInvitation = document.querySelector("#sendInvitation");
     let selectedValue = [];
+
     allCb.addEventListener("change", function () {
-        invitationBtn.style.display = "block";
+        if (eventBtn) {
+            eventBtn.style.display = "block";
+        }
+
+        if (invitationBtn) {
+            invitationBtn.style.display = "block";
+        }
+
         selectedValue = [];
         singleCb.forEach((el) => {
             el.checked = allCb.checked;
             if (allCb.checked) {
-                sendInvitation.style.display = "block";
-                invitationBtn.disabled = false;
+                if (sendInvitation) {
+                    sendInvitation.style.display = "block";
+                }
+                if (invitationBtn) {
+                    invitationBtn.disabled = false;
+                }
+
                 selectedValue.push(el.value);
             } else {
-                sendInvitation.style.display = "none";
-                invitationBtn.disabled = true;
+                if (eventBtn) {
+                    eventBtn.style.display = "none";
+                }
+                if (sendInvitation) {
+                    sendInvitation.style.display = "none";
+                }
+
+                if (invitationBtn) {
+                    invitationBtn.disabled = true;
+                }
             }
+            //  console.log(selectedValue);
         });
     });
     singleCb.forEach((el) => {
         el.addEventListener("change", function () {
             const value = this.value;
             if (this.checked) {
-                invitationBtn.style.display = "block";
+                console.log(selectedValue);
+                if (eventBtn) {
+                    eventBtn.style.display = "block";
+                }
+                if (invitationBtn) {
+                    invitationBtn.style.display = "block";
+                }
+
                 if (!selectedValue.includes(value)) {
-                    sendInvitation.style.display = "block";
-                    invitationBtn.disabled = false;
+                    if (sendInvitation) {
+                        sendInvitation.style.display = "block";
+                    }
+
+                    if (invitationBtn) {
+                        invitationBtn.disabled = false;
+                    }
+
                     selectedValue.push(value);
                 }
             } else {
                 const index = selectedValue.indexOf(value);
                 if (index > -1) {
-                    sendInvitation.style.display = "block";
-                    invitationBtn.disabled = false;
+                    if (eventBtn) {
+                        eventBtn.style.display = "block";
+                    }
+                    if (sendInvitation) {
+                        sendInvitation.style.display = "block";
+                    }
+                    if (invitationBtn) {
+                        invitationBtn.disabled = false;
+                    }
                     selectedValue.splice(index, 1);
-                    sendInvitation.style.display = "block";
-                    invitationBtn.disabled = false;
+                    if (eventBtn) {
+                        eventBtn.style.display = "block";
+                    }
+                    if (sendInvitation) {
+                        sendInvitation.style.display = "block";
+                    }
+                    if (invitationBtn) {
+                        invitationBtn.disabled = false;
+                    }
                 }
             }
+            //  console.log(selectedValue);
             const checkedCount =
                 document.querySelectorAll(".singleCb:checked").length;
             if (checkedCount !== singleCb.length) {
                 allCb.checked = false;
             }
             if (selectedValue.length < 1) {
-                sendInvitation.style.display = "none";
-                invitationBtn.disabled = true;
+                if (eventBtn) {
+                    eventBtn.style.display = "none";
+                }
+                if (sendInvitation) {
+                    sendInvitation.style.display = "none";
+                }
+                if (invitationBtn) {
+                    invitationBtn.disabled = false;
+                }
             }
         });
     });
+    
+    if (eventBtn) {
+        eventBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            let eventModal = new bootstrap.Modal(
+                document.getElementById("eventModal"),
+                {
+                    backdrop: "static",
+                    keyboard: false,
+                }
+            );
+            eventModal.show();
+            
+            document.querySelector("#guest_ids").value = selectedValue;
+        });
+    }
 
     function submitForm(formData, ids) {
         invitationBtn.disabled = true;
         const action = formData.getAttribute("action");
         const method = formData.getAttribute("method");
 
-        console.log(action, method, ids);
+        // console.log(action, method, ids);
         fetch(action, {
             method: method,
             headers: {
@@ -166,31 +240,45 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then((data) => {
-                invitationBtn.disabled = false;
-                invitationBtn.style.display = "none";
+                if (invitationBtn) {
+                    invitationBtn.disabled = false;
+                    invitationBtn.style.display = "none";
+                }
+
                 if (data.action === "sentMail") {
                     toastr.success(data.message);
                 }
             })
             .catch((error) => {
                 alert("Something went wrong: " + error.message);
-                sendInvitation.style.display = "block";
-                invitationBtn.disabled = false;
+                if (sendInvitation) {
+                    sendInvitation.style.display = "block";
+                }
+                if (invitationBtn) {
+                    invitationBtn.disabled = false;
+                }
             })
             .finally(() => {
-                sendInvitation.style.display = "block";
-                invitationBtn.disabled = false;
+                if (sendInvitation) {
+                    sendInvitation.style.display = "block";
+                }
+                if (invitationBtn) {
+                    invitationBtn.disabled = false;
+                }
             });
     }
-    sendInvitation.addEventListener("click", function (e) {
-        e.preventDefault();
-        singleCb.forEach((el) => {
-            el.checked = false;
+
+    if (sendInvitation) {
+        sendInvitation.addEventListener("click", function (e) {
+            e.preventDefault();
+            singleCb.forEach((el) => {
+                el.checked = false;
+            });
+            if (!selectedValue.length > 0) {
+                alert("Select atleat one checkbox");
+            }
+            submitForm(this, selectedValue);
+            selectedValue = [];
         });
-        if (!selectedValue.length > 0) {
-            alert("Select atleat one checkbox");
-        }
-        submitForm(this, selectedValue);
-        selectedValue = [];
-    });
+    }
 });

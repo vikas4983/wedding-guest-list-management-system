@@ -144,6 +144,7 @@ class GuestController extends Controller
             }
             return redirect()->route('guests.index')->with('success', 'Guest updated successfully');
         } catch (\Throwable $th) {
+             Log::info('Updation failed' . $th->getMessage());
             if ($request->ajax() || $request->wantsJson()) {
                 Log::info('Updation failed' . $th->getMessage());
                 return response()->json([
@@ -152,7 +153,7 @@ class GuestController extends Controller
                 ]);
             }
 
-            Log::info('Updation failed' . $th->getMessage());
+           
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }

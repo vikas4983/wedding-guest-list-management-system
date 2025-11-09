@@ -13,7 +13,7 @@
             </button>
         </div>
     </div>
-    <table class="table  table-product" style="width:100%">
+    <table class="table" id="productsTable" style="width:100%">
         <thead>
             <tr>
                 <th>#</th>
