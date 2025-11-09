@@ -7,8 +7,8 @@ function confirmDelete() {
 }
 
 function sendAjax(button) {
-    const row = button.closest("tr");
     const form = button.closest("form");
+    const row = button.closest("tr") || button.closest(".card-item");
     button.disabled = true;
     const originalText = button.innerHTML;
     button.innerHTML = '<i class="mdi mdi-loading mdi-spin"></i>';
@@ -17,6 +17,8 @@ function sendAjax(button) {
         formData;
     } else if (button.classList.contains("statusBtn")) {
         formData.set("is_active", button.checked ? "1" : "0");
+    } else if (button.classList.contains("invitationBtn")) {
+        formData;
     }
     const action = form.action;
     const method = form.getAttribute("method");
@@ -35,11 +37,13 @@ function sendAjax(button) {
         })
         .then((data) => {
             if (data.action === "delete") {
-                row.remove();
-                toastr.error(data.message);
+                if (row) {
+                    row.remove();
+                    toastr.error(data.message);
+                }
             }
             if (data.action === "status") {
-                toastr.success("Status updated successfully!");
+                toastr.success(data.message);
             }
             if (data.action === "edit") {
                 const modalId = button.getAttribute("data-target");
@@ -72,6 +76,8 @@ document.querySelectorAll(".deleteBtn,  .editBtn").forEach((button) => {
             }
         } else if (this.classList.contains("editBtn")) {
             sendAjax(this);
+        } else if (this.classList.contains("sendInvitation")) {
+            sendAjax(this);
         }
     });
 });
@@ -81,5 +87,110 @@ document.querySelectorAll(".statusBtn").forEach((button) => {
         if (this.classList.contains("statusBtn")) {
             sendAjax(this);
         }
+    });
+});
+
+// Checkbox
+document.addEventListener("DOMContentLoaded", function () {
+    const allCb = document.querySelector(".allCb");
+    const singleCb = document.querySelectorAll(".singleCb");
+    const invitationBtn = document.querySelector("#invitationBtn");
+    const sendInvitation = document.querySelector("#sendInvitation");
+    let selectedValue = [];
+    allCb.addEventListener("change", function () {
+        invitationBtn.style.display = "block";
+        selectedValue = [];
+        singleCb.forEach((el) => {
+            el.checked = allCb.checked;
+            if (allCb.checked) {
+                sendInvitation.style.display = "block";
+                invitationBtn.disabled = false;
+                selectedValue.push(el.value);
+            } else {
+                sendInvitation.style.display = "none";
+                invitationBtn.disabled = true;
+            }
+        });
+    });
+    singleCb.forEach((el) => {
+        el.addEventListener("change", function () {
+            const value = this.value;
+            if (this.checked) {
+                invitationBtn.style.display = "block";
+                if (!selectedValue.includes(value)) {
+                    sendInvitation.style.display = "block";
+                    invitationBtn.disabled = false;
+                    selectedValue.push(value);
+                }
+            } else {
+                const index = selectedValue.indexOf(value);
+                if (index > -1) {
+                    sendInvitation.style.display = "block";
+                    invitationBtn.disabled = false;
+                    selectedValue.splice(index, 1);
+                    sendInvitation.style.display = "block";
+                    invitationBtn.disabled = false;
+                }
+            }
+            const checkedCount =
+                document.querySelectorAll(".singleCb:checked").length;
+            if (checkedCount !== singleCb.length) {
+                allCb.checked = false;
+            }
+            if (selectedValue.length < 1) {
+                sendInvitation.style.display = "none";
+                invitationBtn.disabled = true;
+            }
+        });
+    });
+
+    function submitForm(formData, ids) {
+        invitationBtn.disabled = true;
+        const action = formData.getAttribute("action");
+        const method = formData.getAttribute("method");
+
+        console.log(action, method, ids);
+        fetch(action, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector(
+                    'meta[name="csrf-token"]'
+                ).content,
+                Accept: "application/json",
+            },
+            body: JSON.stringify({ ids: ids }),
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error("Something went wrong!");
+                return response.json();
+            })
+            .then((data) => {
+                invitationBtn.disabled = false;
+                invitationBtn.style.display = "none";
+                if (data.action === "sentMail") {
+                    toastr.success(data.message);
+                }
+            })
+            .catch((error) => {
+                alert("Something went wrong: " + error.message);
+                sendInvitation.style.display = "block";
+                invitationBtn.disabled = false;
+            })
+            .finally(() => {
+                sendInvitation.style.display = "block";
+                invitationBtn.disabled = false;
+            });
+    }
+    sendInvitation.addEventListener("click", function (e) {
+        e.preventDefault();
+        singleCb.forEach((el) => {
+            el.checked = false;
+        });
+        if (!selectedValue.length > 0) {
+            alert("Select atleat one checkbox");
+        }
+        submitForm(this, selectedValue);
+        selectedValue = [];
     });
 });

@@ -5,7 +5,7 @@ namespace App\Http\responses;
 class ApiResponse
 {
 
-    public static function success($data = null, $message = 'ok', $action =null,$status = 200)
+    public static function success($data = null, $message = 'ok', $action=null,$status = 200)
     {
         return response()->json([
             'success' => true,

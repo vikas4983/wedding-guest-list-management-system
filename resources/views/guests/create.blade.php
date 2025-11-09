@@ -68,7 +68,7 @@ is-invalid
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <span style="margin-left: 1.5rem;"><input class="form-check-input" type="checkbox"
-                                                id="allEvent" name="event[]" checked="checked" value="0"
+                                                id="allEvent" name="event_ids[]" checked="checked" value="0"
                                                 id="defaultCheck1">
                                             <label class="form-check-label mr-5" for="defaultCheck1">
                                                 All

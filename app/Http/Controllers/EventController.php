@@ -81,10 +81,10 @@ class EventController extends Controller
             $objectData = $event;
             $editForm = view('forms.edit.eventForm', compact('objectData'))->render();
             if ($request->ajax() || $request->wantsJson()) {
-                // return response()->json([
-                //     'action' => 'edit',
-                //     'editForm' => $editForm
-                // ]);
+                return response()->json([
+                    'action' => 'edit',
+                    'editForm' => $editForm
+                ]);
                 $action = 'edit';
                 return api_success($editForm, 'Data loaded successfully', $action);
             }
@@ -102,7 +102,7 @@ class EventController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Event $event)
-    {      
+    {
         try {
             $event->update($request->all());
             if ($request->ajax() || $request->wantsJson()) {

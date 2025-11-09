@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Guest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GuestCreateRequest;
+use App\Jobs\SendInvitaionMail;
+use App\Jobs\SendInvitationMail;
+use App\Models\Event;
 use App\Services\StaticDataService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,8 +32,6 @@ class GuestController extends Controller
     public function index()
     {
         $guests = Guest::with('events')->latest()->paginate(10);
-
-
         return view('guests.index', compact('guests'));
     }
 
@@ -40,7 +41,6 @@ class GuestController extends Controller
     public function create()
     {
         $data = $this->staticDataService->getData();
-
         return view('guests.create', compact('data'));
     }
 
@@ -54,8 +54,14 @@ class GuestController extends Controller
         DB::beginTransaction();
         try {
             $validatedData['user_id'] = Auth::user()->id;
-            $guest =  Guest::create(Arr::only($validatedData, ['user_id', 'name', 'email', 'phone']));
-            $guest->events()->sync($validatedData['event_ids']);
+
+            $guests =  Guest::create(Arr::only($validatedData, ['user_id', 'name', 'email', 'phone']));
+            if (in_array('0', $validatedData['event_ids'])) {
+                $guests->events()->sync(Event::pluck('id')->toArray());
+            } else {
+                $guests->events()->sync($validatedData['event_ids']);
+            }
+            dispatch(new SendInvitationMail($guests));
             Log::info('Invitation send successfully');
             DB::commit();
 

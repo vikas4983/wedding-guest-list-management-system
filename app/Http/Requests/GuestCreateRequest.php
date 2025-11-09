@@ -23,10 +23,12 @@ class GuestCreateRequest extends FormRequest
     public function rules(): array
     {
         $guestId = $this->route('guest');
+        $eventIds = $this->input('event_ids', []);
         return [
             'name' =>  ['required', 'string', 'max:30'],
-            'event_ids' =>  ['nullable', 'array'],
-            'event_ids.*' => ['string', 'exists:events,id'],
+            'event_ids' =>  ['required', 'array'],
+            //'event_ids.*' =>  array_merge(['string', (collect($eventIds)->contains(0) ? [] : ['exists:events,id'])]),
+            'event_ids.*' =>  ['string', (in_array('0', $eventIds) ? [] : 'exists:events,id')],
             'email' => ['required', 'email', 'max:50', Rule::unique('guests')->ignore($guestId)],
             'phone' => ['required', 'digits:10']
         ];
