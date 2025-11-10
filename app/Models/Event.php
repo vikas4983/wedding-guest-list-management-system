@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Attribute;
+use Illuminate\Database\Eloquent\Model;
+
+class Event extends Model
+{
+    protected $fillable = ['user_id', 'name', 'is_active'];
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => ucfirst($value),
+        );
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
+    public function card(){
+        return $this->hasOne(Card::class,'event_id', 'id');
+    }
+}
