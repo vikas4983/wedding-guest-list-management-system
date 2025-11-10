@@ -6,10 +6,10 @@
         <div>
             <a href="{{ route('events.create') }}" class="btn btn-info" id="addGuestBtn">Add Event</a>
         </div>
-        <div class="input-group" style="width: 300px;">
-            <input type="text" class="form-control" placeholder="Enter name, mobile, email...">
+        <div class="input-group" style="width: 255px;">
+            <input type="text" class="form-control" placeholder="Name, Mobile, Email...">
             <button class="input-group-text">
-                <i class="mdi mdi-account-search-outline"></i>
+               Search
             </button>
         </div>
     </div>

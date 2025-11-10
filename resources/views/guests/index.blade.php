@@ -17,7 +17,7 @@
             </form>
         </div>
 
-        <div class="input-group" style="max-width:250px;">
+        <div class="input-group" style="max-width:255px;">
             <input type="text" class="form-control" placeholder="Name, Mobile, Email...">
             <button class="input-group-text">
                 Search
@@ -67,7 +67,7 @@
                         <td>
                             <div class="d-flex gap-2">
                                 <x-edit-action-component :route="route('guests.edit', $guest->id)" :objectData="$guest" :method="'GET'"
-                                    :title="__('labels.guest_edit_title')" :modalSize="__('labels.guest_edit_modal_size')" />
+                                    :title="__('labels.guest_title')" :modalSize="__('labels.guest_edit_modal_size')" />
                                 <span class="mx-1"></span>
                                 <x-delete-action-component :route="route('guests.destroy', $guest->id)" />
 
