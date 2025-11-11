@@ -87,6 +87,10 @@
                 <th>Action</th>
             </tr>
         </thead>
+        <div class="text-center">
+            <span id="copyData" style="color: rgb(30, 9, 218)"></span>
+
+        </div>
         <tbody>
             @if ($contacts->count() > 0)
                 @foreach ($contacts as $index => $contact)

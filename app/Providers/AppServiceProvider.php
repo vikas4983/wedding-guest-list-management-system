@@ -2,24 +2,24 @@
 
 namespace App\Providers;
 
+use App\Services\CountService;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        $this->app->singleton(CountService::class, function () {
+            return new CountService();
+        });
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-         Paginator::useBootstrapFive(); 
+        Paginator::useBootstrapFive();
+        $modelCount = app(CountService::class)->getCount();
+        View::share('count', $modelCount);
     }
 }

@@ -8,11 +8,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactUploadRequest;
 use App\Http\Requests\GuestCreateRequest;
 use App\Imports\ContactImport;
+use App\Models\Guest;
 use App\Models\ImportLog;
 use App\Services\StaticDataService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ContactController extends Controller
@@ -22,16 +25,36 @@ class ContactController extends Controller
      */
     protected $staticDataService;
     public function index(StaticDataService $staticDataService)
-    {  
+    {
         $this->staticDataService = $staticDataService;
         $data = $this->staticDataService->getData();
         $contacts = Contact::latest()->paginate(10);
-        return view('contacts.index', compact('contacts','data'));
+        return view('contacts.index', compact('contacts', 'data'));
     }
 
     public function export()
     {
-        return Excel::download(new ContactExport, 'contacts.xlsx');
+        return Excel::download(
+            new class(
+                Guest::where('status', 1)->get()
+                    ->map(fn($r) => ['type' => 'guest', 'name' => $r->name, 'email' => $r->email, 'phone' => $r->phone])
+                    ->merge(
+                        Contact::where('status', 1)->get()
+                            ->map(fn($r) => ['type' => 'contact', 'name' => $r->name, 'email' => $r->email, 'phone' => $r->phone])
+                    )
+            ) implements FromCollection, WithHeadings {
+                public function __construct(private $rows) {}
+                public function collection()
+                {
+                    return $this->rows;
+                }
+                public function headings(): array
+                {
+                    return ['name', 'email', 'phone'];
+                }
+            },
+            'guests.xlsx'
+        );
     }
 
     /**

@@ -59,4 +59,23 @@ class InvitationController extends Controller
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
+
+    public function invited()
+    {
+        $contacts = Guest::where('status', 1)->get();
+        $guests   = Contact::where('status', 1)->get();
+        $merged = $contacts->merge($guests);
+
+        $page = request()->get('page', 1);
+        $perPage = 10;
+        $data = new \Illuminate\Pagination\LengthAwarePaginator(
+            $merged->forPage($page, $perPage),
+            $merged->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        return view('invitations.index', compact('data'));
+    }
 }

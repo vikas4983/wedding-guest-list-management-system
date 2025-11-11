@@ -25,6 +25,7 @@ Route::middleware([
     Route::resource('events', EventController::class);
     Route::resource('cards', CardController::class);
     Route::resource('contacts', ContactController::class);
-    Route::get('export-file', [ContactController::class, 'export'])->name('export.contacts');
+    Route::get('export-guests', [ContactController::class, 'export'])->name('export.guests');
     Route::post('invitation', [InvitationController::class, 'invitation'])->name('send.invitation');
+    Route::get('invited', [InvitationController::class, 'invited'])->name('invited');
 });

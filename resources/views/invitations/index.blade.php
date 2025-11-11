@@ -1,18 +1,18 @@
 @extends('layouts.main-app')
-@section('title', 'Guests List')
+@section('title', 'Invited List')
 @section('content')
     <x-breadcrumb-component :home-route="['name' => 'Home', 'url' => route('dashboard')]" :current-route="['name' => 'List', 'url' => null]" class="mb-5" />
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <a href="{{ route('guests.create') }}" class="btn btn-info" id="uploadBtn">
-                Guest
+            <a href="{{ route('export.guests') }}" class="btn btn-info" id="uploadBtn">
+                Download
             </a>
 
-            <form id="sendInvitation" style="margin-left: 10px; display:none" action="{{ route('send.invitation') }}"
+            <form id="sendReminder" style="margin-left: 10px; display:none" action="{{ route('send.invitation') }}"
                 method="post">
                 @csrf
-                <button type="button" id="invitationBtn" disabled class="btn btn-info">
-                    INVITATION
+                <button type="button" id="reminderBtn" disabled class="btn btn-info">
+                    Reminder
                 </button>
             </form>
         </div>
@@ -36,13 +36,13 @@
                 <th>Action</th>
             </tr>
         </thead>
-         <div class="text-center">
+        <div class="text-center">
             <span id="copyData" style="color: rgb(30, 9, 218)"></span>
 
         </div>
         <tbody>
-            @if ($guests->count() > 0)
-                @foreach ($guests as $index => $guest)
+            @if ($data->count() > 0)
+                @foreach ($data as $index => $guest)
                     <tr class="viewData">
                         <td>{{ $index + 1 }}</td>
                         <td>
@@ -69,13 +69,14 @@
                         </td>
 
                         <td>
-                            <div class="d-flex gap-2">
-                                <x-edit-action-component :route="route('guests.edit', $guest->id)" :objectData="$guest" :method="'GET'"
+                            {{-- <div class="d-flex gap-2">
+                                <x-edit-action-component :route="route('guest.edit', $guest->id)" :objectData="$guest" :method="'GET'"
                                     :title="__('labels.guest_title')" :modalSize="__('labels.guest_edit_modal_size')" />
                                 <span class="mx-1"></span>
-                                <x-delete-action-component :route="route('guests.destroy', $guest->id)" />
+                                <x-delete-action-component :route="route('guest.destroy', $guest->id)" />
 
-                            </div>
+                            </div> --}}
+                            Invited
                         </td>
                     </tr>
                 @endforeach
@@ -90,7 +91,7 @@
     </table>
 
     <div class="d-flex justify-content-center mt-5">
-        {{ $guests->links() }}
+        {{ $data->links() }}
     </div>
     <script>
         @if (session('success'))

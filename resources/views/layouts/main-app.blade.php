@@ -100,9 +100,8 @@
                                 data-target="#category" aria-expanded="false" aria-controls="category">
                                 <i class="mdi mdi-shape"></i>
                                 <span class="nav-text">Guest <h5 class="badge badge-primary badge-pill">
-
+                                        {{ $count['guests'] ?? '' }}
                                     </h5>
-
                                 </span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="category" data-parent="#sidebar-menu">
@@ -127,6 +126,7 @@
                                 data-target="#brand" aria-expanded="false" aria-controls="brand">
                                 <i class="mdi mdi-label"></i>
                                 <span class="nav-text">Event <h5 class="badge badge-primary badge-pill">
+                                        {{ $count['events'] ?? '' }}
 
                                     </h5></span> <b class="caret"></b>
                             </a>
@@ -152,6 +152,7 @@
                                 data-target="#card" aria-expanded="false" aria-controls="card">
                                 <i class="mdi mdi-label"></i>
                                 <span class="nav-text">Card <h5 class="badge badge-primary badge-pill">
+                                        {{ $count['cards'] ?? '' }}
 
                                     </h5></span> <b class="caret"></b>
                             </a>
@@ -177,6 +178,7 @@
                                 data-target="#contact" aria-expanded="false" aria-controls="contact">
                                 <i class="mdi mdi-label"></i>
                                 <span class="nav-text">Contact <h5 class="badge badge-primary badge-pill">
+                                        {{ $count['contacts'] ?? '' }}
 
                                     </h5></span> <b class="caret"></b>
                             </a>
@@ -201,24 +203,25 @@
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#product" aria-expanded="false" aria-controls="product">
                                 <i class="mdi mdi-palette"></i>
-                                <span class="nav-text">Invitation <h5 class="badge badge-primary badge-pill">
+                                <span class="nav-text">Invited <h5 class="badge badge-primary badge-pill">
+                                        {{ $count['invited'] ?? '' }}
 
                                     </h5></span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="product" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
-                                        <a class="sidenav-item-link" href="#">
+                                        <a class="sidenav-item-link" href="{{ route('invited') }}">
                                             <span class="nav-text">Sent</span>
 
                                         </a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a class="sidenav-item-link" href="#">
                                             <span class="nav-text">Send</span>
 
                                         </a>
-                                    </li>
+                                    </li> --}}
                                 </div>
                             </ul>
                         </li>
