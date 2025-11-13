@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const singleCb = document.querySelectorAll(".singleCb");
     const invitationBtn = document.querySelector("#invitationBtn");
     const sendInvitation = document.querySelector("#sendInvitation");
+
     let selectedValue = [];
 
     allCb.addEventListener("change", function () {
@@ -201,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-    
+
     if (eventBtn) {
         eventBtn.addEventListener("click", function (e) {
             e.preventDefault();
@@ -213,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             );
             eventModal.show();
-            
+
             document.querySelector("#guest_ids").value = selectedValue;
         });
     }

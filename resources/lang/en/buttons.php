@@ -6,6 +6,7 @@ return [
     'cancel' => 'Cancel',
     'add_guest' => 'Send Invitation',
     'invitation' => 'Send Invitation',
+    'reminder_invitation' => 'Send Reminder',
     'add_new_brand' => 'Add New Brand',
     'add_new_product' => 'Add New Product',
     'add_new_supplier' => 'Add New Supplier',

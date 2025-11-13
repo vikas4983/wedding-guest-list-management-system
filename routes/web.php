@@ -13,7 +13,6 @@ use Spatie\Permission\Models\Permission;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::middleware([
     'auth:sanctum',
     'role:admin',
@@ -28,4 +27,5 @@ Route::middleware([
     Route::get('export-guests', [ContactController::class, 'export'])->name('export.guests');
     Route::post('invitation', [InvitationController::class, 'invitation'])->name('send.invitation');
     Route::get('invited', [InvitationController::class, 'invited'])->name('invited');
+    Route::get('search-keyword', [InvitationController::class, 'search'])->name('search.keyword');
 });

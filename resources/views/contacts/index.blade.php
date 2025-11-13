@@ -13,10 +13,13 @@
             </button>
         </div>
         <div class="input-group" style="max-width:255px;">
-            <input type="text" class="form-control" placeholder="Name, Mobile, Email...">
-            <button class="input-group-text">
-                Search
-            </button>
+            <form action="{{ route('search.keyword') }}" method="get" class="d-flex w-100">
+                <input type="text" class="form-control" name="keyword" placeholder="Name, Mobile, Email..."
+                    autocomplete="off">
+                <button class="input-group-text">
+                    Search
+                </button>
+            </form>
         </div>
     </div>
     {{-- Modal --}}
@@ -115,8 +118,9 @@
                             <a href="mailto:{{ $contact->email }}" style="text-decoration: none; color: inherit;">
                                 {{ Str::limit($contact->email ?? '', 7) }}
                             </a>
-                            <i class="fas fa-copy sm copyEmail " style="cursor: pointer; margin-left: 8px; color: #503F71;"
-                                title="Copy Email" data-email="{{ $contact->email }}"></i>
+                            <i class="fas fa-copy sm copyEmail "
+                                style="cursor: pointer; margin-left: 8px; color: #503F71;" title="Copy Email"
+                                data-email="{{ $contact->email }}"></i>
                         </td>
 
                         <td>

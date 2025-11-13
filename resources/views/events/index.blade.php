@@ -6,11 +6,14 @@
         <div>
             <a href="{{ route('events.create') }}" class="btn btn-info" id="addGuestBtn">Add Event</a>
         </div>
-        <div class="input-group" style="width: 255px;">
-            <input type="text" class="form-control" placeholder="Name, Mobile, Email...">
-            <button class="input-group-text">
-               Search
-            </button>
+        <div class="input-group" style="max-width:255px;">
+            <form action="{{ route('search.keyword') }}" method="get" class="d-flex w-100">
+                <input type="text" class="form-control" name="keyword" placeholder="Name, Mobile, Email..."
+                    autocomplete="off">
+                <button class="input-group-text">
+                    Search
+                </button>
+            </form>
         </div>
     </div>
     <table class="table" id="productsTable" style="width:100%">
@@ -22,7 +25,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-         <div class="text-center">
+        <div class="text-center">
             <span id="copyData" style="color: rgb(30, 9, 218)"></span>
 
         </div>
@@ -48,7 +51,7 @@
                             <div class="d-flex gap-2">
                                 <x-edit-action-component :route="route('events.edit', $event->id)" :objectData="$event" :method="'GET'"
                                     :title="__('labels.event_title')" :modalSize="__('labels.event_edit_modal_size')" />
-                                     <span class="mx-1"></span>
+                                <span class="mx-1"></span>
                                 <x-delete-action-component :route="route('events.destroy', $event->id)" />
 
                             </div>

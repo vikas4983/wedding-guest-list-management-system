@@ -7,7 +7,6 @@
             <a href="{{ route('guests.create') }}" class="btn btn-info" id="uploadBtn">
                 Guest
             </a>
-
             <form id="sendInvitation" style="margin-left: 10px; display:none" action="{{ route('send.invitation') }}"
                 method="post">
                 @csrf
@@ -16,12 +15,14 @@
                 </button>
             </form>
         </div>
-
         <div class="input-group" style="max-width:255px;">
-            <input type="text" class="form-control" placeholder="Name, Mobile, Email...">
-            <button class="input-group-text">
-                Search
-            </button>
+            <form action="{{ route('search.keyword') }}" method="get" class="d-flex w-100">
+                <input type="text" class="form-control" name="keyword" placeholder="Name, Mobile, Email..."
+                    autocomplete="off">
+                <button class="input-group-text">
+                    Search
+                </button>
+            </form>
         </div>
     </div>
 
@@ -36,7 +37,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-         <div class="text-center">
+        <div class="text-center">
             <span id="copyData" style="color: rgb(30, 9, 218)"></span>
 
         </div>
