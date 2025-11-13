@@ -25,7 +25,6 @@ class SendInvitationMail implements ShouldQueue
     {
         $this->guest = $guest;
         $this->selectedIds = $selectedIds;
-       
     }
 
 
@@ -46,7 +45,6 @@ class SendInvitationMail implements ShouldQueue
             ]);
             return;
         }
-
         try {
             $activeEventNames  = Event::active()->pluck('name')->toArray() ?? [];
             if (!empty($guest->events)) {
@@ -55,7 +53,7 @@ class SendInvitationMail implements ShouldQueue
                         $card = $event->card;
                         $this->invitationService->sendInvitation($guest, $card);
                     }
-                    // $this->updateStatus($guest);
+                    $this->updateStatus($guest);
                 }
             }
             $eventIds = collect($eventIds)->flatten()->toArray();
@@ -63,7 +61,6 @@ class SendInvitationMail implements ShouldQueue
                 foreach ($eventIds as  $eventId) {
                     if ($event = Event::with('card')->find($eventId)) {
                         $card = $event->card;
-                        Log::info($card);
                         $this->invitationService->sendInvitation($guest, $card);
                     }
                 }

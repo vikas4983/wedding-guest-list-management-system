@@ -4,6 +4,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\InvitationController;
 use App\Models\User;
@@ -13,7 +14,6 @@ use Spatie\Permission\Models\Permission;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::middleware([
     'auth:sanctum',
     'role:admin',
@@ -25,6 +25,8 @@ Route::middleware([
     Route::resource('events', EventController::class);
     Route::resource('cards', CardController::class);
     Route::resource('contacts', ContactController::class);
-    Route::get('export-file', [ContactController::class, 'export'])->name('export.contacts');
+    Route::get('export-guests', [ContactController::class, 'export'])->name('export.guests');
     Route::post('invitation', [InvitationController::class, 'invitation'])->name('send.invitation');
+    Route::get('invited', [InvitationController::class, 'invited'])->name('invited');
+    Route::get('filter-keyword', [FilterController::class, 'filter'])->name('filter.keyword');
 });

@@ -29,10 +29,11 @@ class GuestController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
         $guests = Guest::with('events')->latest()->paginate(10);
-        return view('guests.index', compact('guests'));
+        $url  = $request->segment(1);
+        return view('guests.index', compact('guests', 'url'));
     }
 
     /**
@@ -89,9 +90,9 @@ class GuestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Guest $guest)
+    public function show(Guest $guest, Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -144,7 +145,7 @@ class GuestController extends Controller
             }
             return redirect()->route('guests.index')->with('success', 'Guest updated successfully');
         } catch (\Throwable $th) {
-             Log::info('Updation failed' . $th->getMessage());
+            Log::info('Updation failed' . $th->getMessage());
             if ($request->ajax() || $request->wantsJson()) {
                 Log::info('Updation failed' . $th->getMessage());
                 return response()->json([
@@ -153,7 +154,7 @@ class GuestController extends Controller
                 ]);
             }
 
-           
+
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }

@@ -6,12 +6,15 @@
         <div>
             <a href="{{ route('events.create') }}" class="btn btn-info" id="addGuestBtn">Add Event</a>
         </div>
-        <div class="input-group" style="width: 300px;">
-            <input type="text" class="form-control" placeholder="Enter name, mobile, email...">
-            <button class="input-group-text">
-                <i class="mdi mdi-account-search-outline"></i>
-            </button>
-        </div>
+        {{-- <div class="input-group" style="max-width:255px;">
+            <form action="{{ route('filter.keyword') }}" method="get" class="d-flex w-100">
+                <input type="text" class="form-control" name="keyword" placeholder="Name, Mobile, Email..."
+                    autocomplete="off">
+                <button class="input-group-text">
+                    Search
+                </button>
+            </form>
+        </div> --}}
     </div>
     <table class="table" id="productsTable" style="width:100%">
         <thead>
@@ -22,6 +25,10 @@
                 <th>Action</th>
             </tr>
         </thead>
+        <div class="text-center">
+            <span id="copyData" style="color: rgb(30, 9, 218)"></span>
+
+        </div>
         <tbody>
             @if ($events->count() > 0)
                 <div class="row ">
@@ -44,7 +51,7 @@
                             <div class="d-flex gap-2">
                                 <x-edit-action-component :route="route('events.edit', $event->id)" :objectData="$event" :method="'GET'"
                                     :title="__('labels.event_title')" :modalSize="__('labels.event_edit_modal_size')" />
-                                     <span class="mx-1"></span>
+                                <span class="mx-1"></span>
                                 <x-delete-action-component :route="route('events.destroy', $event->id)" />
 
                             </div>

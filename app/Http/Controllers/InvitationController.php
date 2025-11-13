@@ -7,14 +7,15 @@ use App\Jobs\SendInvitationMail;
 use App\Models\Contact;
 use App\Models\Event;
 use App\Models\Guest;
+use App\Services\StaticDataService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class InvitationController extends Controller
 {
     public function invitation(Request $request)
     {
-
         $guestIds = $request->input('ids', []);
         $contactIds = $request->input('ids', []);
         $eventIds = $request->input('event_ids', []);
@@ -24,10 +25,8 @@ class InvitationController extends Controller
             ->filter()
             ->values()
             ->toArray();
-
         try {
             $guests = Guest::whereIn('id', $guestIds)->get();
-
             if ($guests->isNotEmpty()) {
                 foreach ($guests as  $guest) {
                     dispatch(new SendInvitationMail($guest));
@@ -58,5 +57,29 @@ class InvitationController extends Controller
             }
             return redirect()->back()->with('error', 'Something went wrong');
         }
+    }
+    protected $staticDataService;
+
+    public function invited(StaticDataService $staticDataService, Request $request)
+    {
+        $this->staticDataService = $staticDataService;
+
+        $contacts = Guest::where('status', 1)->get();
+        $guests   = Contact::where('status', 1)->get();
+        $merged = $contacts->merge($guests);
+
+        $page = request()->get('page', 1);
+        $perPage = 10;
+        $dataList = new \Illuminate\Pagination\LengthAwarePaginator(
+            $merged->forPage($page, $perPage),
+            $merged->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+        $url = $request->segment(1);
+        $data = $this->staticDataService->getData();
+
+        return view('invitations.index', compact('data', 'dataList',  'url'));
     }
 }

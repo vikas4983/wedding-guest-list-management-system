@@ -34,7 +34,7 @@
     <!-- MONO CSS -->
     <link id="main-css-href" rel="stylesheet" href="{{ asset('assets/theme/css/style.css') }}" />
     <!-- FAVICON -->
-    <link href="{{ asset('storage/favicons/favicon.png') }}" rel="favicon icon" />
+    <link href="{{ asset('assets/theme/images/favicon-new.png') }}" rel="favicon icon" />
     <!--
     HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
   -->
@@ -87,22 +87,21 @@
                     <ul class="nav sidebar-inner" id="sidebar-menu">
                         <li class="active">
                             <a class="sidenav-item-link" href="{{ route('dashboard') }}">
-                                <i class="mdi mdi-briefcase-account-outline"></i>
+                                <i class="mdi mdi-home-heart"></i>
                                 <span class="nav-text"> Dashboard</span>
                             </a>
                         </li>
 
                         <li class="section-title">
-                            Inventory
+                            Weeding
                         </li>
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#category" aria-expanded="false" aria-controls="category">
-                                <i class="mdi mdi-shape"></i>
+                                <i class="mdi mdi-account-group-outline"></i>
                                 <span class="nav-text">Guest <h5 class="badge badge-primary badge-pill">
-
+                                        {{ $count['guests'] ?? '' }}
                                     </h5>
-
                                 </span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="category" data-parent="#sidebar-menu">
@@ -125,8 +124,9 @@
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#brand" aria-expanded="false" aria-controls="brand">
-                                <i class="mdi mdi-label"></i>
+                                <i class="mdi mdi-animation"></i>
                                 <span class="nav-text">Event <h5 class="badge badge-primary badge-pill">
+                                        {{ $count['events'] ?? '' }}
 
                                     </h5></span> <b class="caret"></b>
                             </a>
@@ -150,8 +150,9 @@
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#card" aria-expanded="false" aria-controls="card">
-                                <i class="mdi mdi-label"></i>
+                                <i class="mdi mdi-credit-card-plus"></i>
                                 <span class="nav-text">Card <h5 class="badge badge-primary badge-pill">
+                                        {{ $count['cards'] ?? '' }}
 
                                     </h5></span> <b class="caret"></b>
                             </a>
@@ -175,8 +176,9 @@
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#contact" aria-expanded="false" aria-controls="contact">
-                                <i class="mdi mdi-label"></i>
+                                <i class="mdi mdi-contact-mail"></i>
                                 <span class="nav-text">Contact <h5 class="badge badge-primary badge-pill">
+                                        {{ $count['contacts'] ?? '' }}
 
                                     </h5></span> <b class="caret"></b>
                             </a>
@@ -200,29 +202,30 @@
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#product" aria-expanded="false" aria-controls="product">
-                                <i class="mdi mdi-palette"></i>
-                                <span class="nav-text">Invitation <h5 class="badge badge-primary badge-pill">
+                                <i class="mdi mdi-email-check"></i>
+                                <span class="nav-text">Invited <h5 class="badge badge-primary badge-pill">
+                                        {{ $count['invited'] ?? '' }}
 
                                     </h5></span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="product" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
-                                        <a class="sidenav-item-link" href="#">
+                                        <a class="sidenav-item-link" href="{{ route('invited') }}">
                                             <span class="nav-text">Sent</span>
 
                                         </a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a class="sidenav-item-link" href="#">
                                             <span class="nav-text">Send</span>
 
                                         </a>
-                                    </li>
+                                    </li> --}}
                                 </div>
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        {{-- <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#supplier" aria-expanded="false" aria-controls="supplier">
                                 <i class="mdi mdi-package-variant"></i>
@@ -258,7 +261,7 @@
                                     </li>
                                 </div>
                             </ul>
-                        </li>
+                        </li> --}}
 
                     </ul>
 
@@ -289,9 +292,9 @@
 
                             <li class="dropdown user-menu">
                                 <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <img src="{{ asset('storage/banners/default_image.png') }}"
+                                    <img src="{{ asset('assets/theme/images/default_image.png') }}"
                                         class="user-image rounded-circle" alt="User Image" />
-                                    <span class="d-none d-lg-inline-block">{{ Auth::user()->name ?? '' }}</span>
+                                    <span class="d-none d-lg-inline-block">{{ ucfirst(Auth::user()->name ?? '') }}</span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
 
@@ -336,110 +339,7 @@
         </div>
     </div>
 
-    <!-- Card Offcanvas -->
-    <div class="card card-offcanvas" id="contact-off">
-        <div class="card-header">
-            <h2>Contacts</h2>
-            <a href="#" class="btn btn-primary btn-pill px-4">Add New</a>
-        </div>
-        <div class="card-body">
-
-            <div class="mb-4">
-                <input type="text" class="form-control form-control-lg form-control-secondary rounded-0"
-                    placeholder="Search contacts...">
-            </div>
-
-            <div class="media media-sm">
-                <div class="media-sm-wrapper">
-                    <a href="user-profile.html">
-                        <img src="images/user/user-sm-01.jpg" alt="User Image">
-                        <span class="active bg-primary"></span>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <a href="user-profile.html">
-                        <span class="title">Selena Wagner</span>
-                        <span class="discribe">Designer</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="media media-sm">
-                <div class="media-sm-wrapper">
-                    <a href="user-profile.html">
-                        <img src="images/user/user-sm-02.jpg" alt="User Image">
-                        <span class="active bg-primary"></span>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <a href="user-profile.html">
-                        <span class="title">Walter Reuter</span>
-                        <span>Developer</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="media media-sm">
-                <div class="media-sm-wrapper">
-                    <a href="user-profile.html">
-                        <img src="images/user/user-sm-03.jpg" alt="User Image">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <a href="user-profile.html">
-                        <span class="title">Larissa Gebhardt</span>
-                        <span>Cyber Punk</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="media media-sm">
-                <div class="media-sm-wrapper">
-                    <a href="user-profile.html">
-                        <img src="images/user/user-sm-04.jpg" alt="User Image">
-                    </a>
-
-                </div>
-                <div class="media-body">
-                    <a href="user-profile.html">
-                        <span class="title">Albrecht Straub</span>
-                        <span>Photographer</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="media media-sm">
-                <div class="media-sm-wrapper">
-                    <a href="user-profile.html">
-                        <img src="images/user/user-sm-05.jpg" alt="User Image">
-                        <span class="active bg-danger"></span>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <a href="user-profile.html">
-                        <span class="title">Leopold Ebert</span>
-                        <span>Fashion Designer</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="media media-sm">
-                <div class="media-sm-wrapper">
-                    <a href="user-profile.html">
-                        <img src="images/user/user-sm-06.jpg" alt="User Image">
-                        <span class="active bg-primary"></span>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <a href="user-profile.html">
-                        <span class="title">Selena Wagner</span>
-                        <span>Photographer</span>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
+   
     <script src="{{ asset('assets/theme/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/theme/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/theme/plugins/simplebar/simplebar.min.js') }}"></script>
