@@ -4,6 +4,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\InvitationController;
 use App\Models\User;
@@ -27,5 +28,5 @@ Route::middleware([
     Route::get('export-guests', [ContactController::class, 'export'])->name('export.guests');
     Route::post('invitation', [InvitationController::class, 'invitation'])->name('send.invitation');
     Route::get('invited', [InvitationController::class, 'invited'])->name('invited');
-    Route::get('search-keyword', [InvitationController::class, 'search'])->name('search.keyword');
+    Route::get('filter-keyword', [FilterController::class, 'filter'])->name('filter.keyword');
 });

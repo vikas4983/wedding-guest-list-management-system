@@ -24,12 +24,13 @@ class ContactController extends Controller
      * Display a listing of the resource.
      */
     protected $staticDataService;
-    public function index(StaticDataService $staticDataService)
+    public function index(Request $request, StaticDataService $staticDataService)
     {
         $this->staticDataService = $staticDataService;
         $data = $this->staticDataService->getData();
         $contacts = Contact::latest()->paginate(10);
-        return view('contacts.index', compact('contacts', 'data'));
+        $url  = $request->segment(1);
+        return view('contacts.index', compact('contacts', 'data', 'url'));
     }
 
     public function export()

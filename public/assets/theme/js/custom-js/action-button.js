@@ -283,3 +283,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const allEvent = document.querySelector("#allEvent");
+    const selectedEvent = document.querySelectorAll(".selectEvent");
+    const selectedcb = allEvent.checked ? [allEvent.value] : [""];
+    allEvent.addEventListener("change", function () {
+        selectedEvent.forEach((cb) => (cb.checked = false));
+    });
+    selectedEvent.forEach((cb) => {
+        cb.addEventListener("change", function () {
+            allEvent.checked = false;
+        });
+    });
+});

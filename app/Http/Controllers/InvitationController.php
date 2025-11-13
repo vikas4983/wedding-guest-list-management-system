@@ -59,26 +59,27 @@ class InvitationController extends Controller
         }
     }
     protected $staticDataService;
-    public function invited(StaticDataService $staticDataService)
+
+    public function invited(StaticDataService $staticDataService, Request $request)
     {
         $this->staticDataService = $staticDataService;
-        $staticData = $this->staticDataService->getData();
+
         $contacts = Guest::where('status', 1)->get();
         $guests   = Contact::where('status', 1)->get();
         $merged = $contacts->merge($guests);
 
         $page = request()->get('page', 1);
         $perPage = 10;
-        $data = new \Illuminate\Pagination\LengthAwarePaginator(
+        $dataList = new \Illuminate\Pagination\LengthAwarePaginator(
             $merged->forPage($page, $perPage),
             $merged->count(),
             $perPage,
             $page,
             ['path' => request()->url(), 'query' => request()->query()]
         );
+        $url = $request->segment(1);
+        $data = $this->staticDataService->getData();
 
-        return view('invitations.index', compact('data', 'staticData'));
+        return view('invitations.index', compact('data', 'dataList',  'url'));
     }
-
-    
 }

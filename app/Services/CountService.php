@@ -19,6 +19,7 @@ class CountService
                 'events' => Event::where('is_active', 1)->count(),
                 'cards' => Card::where('is_active', 1)->count(),
                 'contacts' => Contact::count(),
+                'total_guests' => Contact::count() + Guest::count(),
                 'invited' => Guest::whereStatus(1)->count()
                     + Contact::whereStatus(1)->count(),
             ];

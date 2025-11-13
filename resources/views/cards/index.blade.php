@@ -6,12 +6,6 @@
         <div>
             <a href="{{ route('cards.create') }}" class="btn btn-info" id="addGuestBtn">Add Card</a>
         </div>
-        <div class="input-group" style="width: 255px;">
-            <input type="text" class="form-control" placeholder="Name, Mobile, Email...">
-            <button class="input-group-text">
-              Search
-            </button>
-        </div>
     </div>
     @include('alerts.alert')
     @if ($errors->any())

@@ -14,18 +14,20 @@
 
         </div>
 
-        <div class="input-group" style="max-width:255px;">
-            <form action="{{ route('search.keyword') }}" method="get" class="d-flex w-100">
+        {{-- <div class="input-group" style="max-width:255px;">
+            <form action="{{route('filer.keyword')}}" method="get" class="d-flex w-100">
+                <input type="hidden" name="url" value="{{ $url ?? '' }}">
                 <input type="text" class="form-control" name="keyword" placeholder="Name, Mobile, Email..."
                     autocomplete="off">
                 <button class="input-group-text">
                     Search
                 </button>
             </form>
-        </div>
+        </div> --}}
+
         {{-- Modal --}}
-        <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModal"
-            aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModal" aria-hidden="true"
+            data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lr" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -52,7 +54,7 @@
                                                 All
                                             </label></span>
                                     </div>
-                                    @foreach ($staticData['events'] as $event)
+                                    @foreach ($data['events'] as $event)
                                         <div class="col-lg-3">
                                             <span class="col-lg-3">
                                                 <input class="form-check-input selectEvent mr-5" type="checkbox"
@@ -98,8 +100,8 @@
 
         </div>
         <tbody>
-            @if ($data->count() > 0)
-                @foreach ($data as $index => $guest)
+            @if ($dataList->count() > 0)
+                @foreach ($dataList as $index => $guest)
                     <tr class="viewData">
                         <td>{{ $index + 1 }}</td>
                         <td>
@@ -121,9 +123,8 @@
                             <a href="mailto:{{ $guest->email }}" style="text-decoration: none; color: inherit;">
                                 {{ Str::limit($guest->email ?? '', 7) }}
                             </a>
-                            <i class="fas fa-copy sm copyEmail "
-                                style="cursor: pointer; margin-left: 8px; color: #503F71;" title="Copy Email"
-                                data-email="{{ $guest->email }}"></i>
+                            <i class="fas fa-copy sm copyEmail " style="cursor: pointer; margin-left: 8px; color: #503F71;"
+                                title="Copy Email" data-email="{{ $guest->email }}"></i>
                         </td>
 
                         <td>
@@ -149,7 +150,7 @@
     </table>
 
     <div class="d-flex justify-content-center mt-5">
-        {{ $data->links() }}
+        {{ $dataList->links() }}
     </div>
     <script>
         @if (session('success'))

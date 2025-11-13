@@ -50,6 +50,8 @@ return [
     'contact_name' => 'Upload File',
     'contact_title' => 'Upload Bulk Contacts',
     'contact_edit_title' => 'Contact',
+    'contact_phone' => 'Phone',
+    'contact_email' => 'Email',
   
 
 

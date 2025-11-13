@@ -6,15 +6,15 @@
         <div>
             <a href="{{ route('events.create') }}" class="btn btn-info" id="addGuestBtn">Add Event</a>
         </div>
-        <div class="input-group" style="max-width:255px;">
-            <form action="{{ route('search.keyword') }}" method="get" class="d-flex w-100">
+        {{-- <div class="input-group" style="max-width:255px;">
+            <form action="{{ route('filter.keyword') }}" method="get" class="d-flex w-100">
                 <input type="text" class="form-control" name="keyword" placeholder="Name, Mobile, Email..."
                     autocomplete="off">
                 <button class="input-group-text">
                     Search
                 </button>
             </form>
-        </div>
+        </div> --}}
     </div>
     <table class="table" id="productsTable" style="width:100%">
         <thead>
