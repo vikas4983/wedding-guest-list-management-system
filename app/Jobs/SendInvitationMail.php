@@ -63,6 +63,7 @@ class SendInvitationMail implements ShouldQueue
                         $card = $event->card;
                         $this->invitationService->sendInvitation($guest, $card);
                     }
+                    $this->updateStatus($guest);
                 }
             }
         } catch (\Throwable $th) {
